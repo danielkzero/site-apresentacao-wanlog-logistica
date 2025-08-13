@@ -1,0 +1,7 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+.active {
+    color: #fff;
+    opacity: 1 !important; /* Full opacity for active state */
+}

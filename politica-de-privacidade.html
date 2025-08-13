@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanlog - transporte e logística</title>
+    <meta name="description"
+        content="Wanlog é uma empresa de transporte e logística, facilitando o gerenciamento de fretes e entregas para nossos clientes e parceiros.">
+    <meta name="keywords" content="transporte, logística, fretes, entregas, Wanlog">
+
+    <!-- Favicons -->
+    <link rel="icon" href="assets/img/logo.png" type="image/png">
+    <link rel="apple-touch-icon" href="assets/img/logo.png">
+
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Boxicons CSS -->
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <link href='https://cdn.boxicons.com/fonts/brands/boxicons-brands.min.css' rel='stylesheet'>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/index.css">
+</head>
+
+<body class="bg-gray-100 dark:bg-gray-800 text-gray-800" id="app">
+    <!-- painel para fechamento de menu ao clicar fora da tela -->
+    <div class="absolute left-0 top-0 z-10 w-full min-h-full bg-black opacity-50" v-on:click="fecharMenu"
+        v-bind:class="{'hidden': !toggleMenuMobile}" style="height: 100%;">
+    </div>
+
+    <div class="min-h-screen flex flex-col">
+        <!-- Header Section -->
+        <header class="bg-white dark:bg-gray-900">
+            <navbar-component :menus="menus" />
+        </header>        
+
+        <main>
+            <!-- Política de privacidade -->
+            <section class="w-[1320px] mx-auto px-4 py-10">
+                <h2 class="text-3xl font-bold mb-6">Política de Privacidade</h2>
+                <p class="mb-4">É política do Wanlog respeitar a sua privacidade em relação a qualquer informação sua que possamos coletar no site <a href="http://www.wanlog.com.br" class="text-blue-600 hover:underline">Wanlog</a>.</p>
+                <p class="mb-4">Solicitamos informações pessoais apenas quando realmente precisamos delas para lhe fornecer um serviço. Fazemo-lo por meios justos e legais, com o seu conhecimento e consentimento. Também informamos por que estamos coletando e como será usado.</p>
+                <p class="mb-4">Apenas retemos as informações coletadas pelo tempo necessário para fornecer o serviço solicitado. Quando armazenamos dados, protegemos dentro de meios comercialmente aceitáveis para evitar perdas e roubos, bem como acesso, divulgação, cópia, uso ou modificação não autorizados.</p>
+                <p class="mb-4">Não compartilhamos informações de identificação pessoal publicamente ou com terceiros.</p>
+                <p class="mb-4">O nosso site pode ter links para sites externos que não são operados por nós. Esteja ciente de que não temos controle sobre o conteúdo e práticas desses sites e não podemos aceitar responsabilidade por suas respectivas políticas de privacidade.</p>
+                <p class="mb-4">Você é livre para recusar a nossa solicitação de informações pessoais, entendendo que talvez não possamos fornecer alguns dos serviços desejados.</p>
+                <p class="mb-4">O uso continuado de nosso site será considerado como aceitação de nossas práticas em torno de privacidade e informações pessoais. Se você tiver alguma dúvida sobre como lidamos com dados do usuário e informações pessoais, entre em contato conosco.</p>
+                <h3 class="text-2xl font-semibold mt-6 mb-4">Mais informações</h3>
+                <p class="mb-4">Esperamos que esteja esclarecido e, como mencionado anteriormente, se houver algo que você não tem certeza se precisa ou não, geralmente é mais seguro deixar os cookies ativados, caso interaja com um dos recursos que você usa em nosso site.</p>
+            </section>
+        </main>
+
+        <!-- Footer componente -->        
+        <footer-component />
+    </div>
+
+    <!-- Vu3.js CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+
+    <!-- axios.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script src="index.js"></script>
+
+    <script>
+        document.documentElement.classList.add('dark');
+    </script>
+</body>
+
+</html>

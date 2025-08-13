@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanlog - transporte e logística</title>
+    <meta name="description"
+        content="Wanlog é uma empresa de transporte e logística, facilitando o gerenciamento de fretes e entregas para nossos clientes e parceiros.">
+    <meta name="keywords" content="transporte, logística, fretes, entregas, Wanlog">
+
+    <!-- Favicons -->
+    <link rel="icon" href="assets/img/logo.png" type="image/png">
+    <link rel="apple-touch-icon" href="assets/img/logo.png">
+
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Boxicons CSS -->
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <link href='https://cdn.boxicons.com/fonts/brands/boxicons-brands.min.css' rel='stylesheet'>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/index.css">
+</head>
+
+<body class="bg-gray-100 dark:bg-gray-800 text-gray-800" id="app">
+    <!-- painel para fechamento de menu ao clicar fora da tela -->
+    <div class="absolute left-0 top-0 z-10 w-full min-h-full bg-black opacity-50" v-on:click="fecharMenu"
+        v-bind:class="{'hidden': !toggleMenuMobile}" style="height: 100%;">
+    </div>
+
+    <div class="min-h-screen flex flex-col">
+
+        <!-- Header Section -->
+        <header class="bg-white dark:bg-gray-900">
+
+            <!-- Section para hero -->
+            <div class="bg-[url('./assets/img/1.png')] bg-cover bg-center h-[550px]">
+
+                <!-- navbar horizontal com o menu do site -->
+                <nav>
+                    <div class="max-w-[1320px] mx-auto px-4 py-4 flex justify-between items-center">
+                        <div class="flex items center">
+                            <img src="assets/img/wanlog.png" alt="Wanlog Logo" class="h-10 mr-3">
+                        </div>
+
+                        <!-- menu superior em navbar -->
+                        <div class="hidden md:flex space-x-6 flex items-center">
+                            <a v-for="menu in menus" v-bind:href="menu.link"
+                                class="text-gray-200 transition opacity-75 hover:opacity-100 bg-ghost"
+                                :class=" { 'active' : menu.nome == 'Home' }">{{ menu.nome }}</a>
+                            <a href="tel:2435120529"
+                                class="ml-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-500 hover:bg-blue-700 transition duration-200">
+                                <div class=" flex items-center justify-center">
+                                    Atendimento <i class='bx  bxs-phone ms-1'></i>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- menu mobile -->
+                        <div class="md:hidden">
+
+                            <!-- botão toggle para menu sidebar -->
+                            <button class="text-gray-100 hover:text-blue-500 focus:outline-none" type="button"
+                                v-on:click="abrirMenu">
+                                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 6h16M4 12h16m-7 6h7"></path>
+                                </svg>
+                            </button>
+
+                            <!-- menu sidebar para utilizar via toggle -->
+                            <aside id="default-sidebar"
+                                class="fixed top-0 left-0 z-40 w-64 h-screen transform transition shadow-lg"
+                                aria-label="Sidebar"
+                                v-bind:class="{'translate-x-0': toggleMenuMobile, '-translate-x-full': !toggleMenuMobile}">
+
+                                <div class="h-full px-3 py-4 overflow-y-auto bg-gray-800 text-gray-200">
+                                    <img src="assets/img/wanlog.png" alt="Wanlog Logo" class="h-10 mr-3 mb-5">
+                                    <ul class="space-y-2 font-medium">
+                                        <li v-for="menu in menus" v-bind:key="menu.nome">
+                                            <a v-bind:href="menu.link"
+                                                class="flex items-center p-2 text-gray-200 hover:bg-blue-500 hover:text-white rounded-lg">
+                                                {{ menu.nome }}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </aside>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- Área oara consulta de frete e destino -->
+                <div class="max-w-[1320px] mx-auto py-8">
+                    <div class="rounded-lg p-6 md:w-[600px]">
+                        <h2 class="text-4xl font-bold mb-4 text-white">
+                            <i class='bx  bxs-location-alt'></i> Atuação
+                        </h2>
+                        <p class="text-lg text-gray-200 mb-6">
+                            A Wanlog oferece soluções de transporte e logística para atender às necessidades de nossos
+                            clientes.
+                            Consulte disponibilidade usando o campo abaixo e digitando a cidade de destino.
+                        </p>
+                        <div class="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 
+                                has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 
+                                has-[input:focus-within]:outline-blue-500">
+
+                            <input type="text" name="destino" placeholder="Digite o CEP ou cidade de destino"
+                                class="block min-w-0 w-64 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+                                v-model="inputEndereco" v-on:input="handleInput" autocomplete="off">
+                            <div class="grid shrink-0 grid-cols-1 focus-within:relative">
+                                <button type="submit"
+                                    class="px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-200 m-1">
+                                    Consultar
+                                </button>
+                            </div>
+                        </div>
+
+                        <ul v-if="suggestions.length"
+                            class="bg-white border border-gray-300 rounded max-h-40 overflow-y-auto p-4 cursor-pointer">
+                            <li v-for="s in suggestions" :key="s" @click="selectSuggestion(s)">
+                                {{ s }}
+                            </li>
+                        </ul>
+
+                        <div v-if="resultado == 'sim'"
+                            class="p-4 m-4 bg-green-400 rounded shadow flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class='bx bx-check me-2 text-2xl'></i> Atendemos este endereço!
+                            </div>
+                            <a href="tel:2435120529"
+                                class="ml-4 px-4 py-2 bg-white text-green-500 rounded hover:bg-green-500 hover:text-white transition duration-200">
+                                <div class=" flex items-center justify-center">
+                                    falar conosco <i class='bx  bxs-phone ms-1'></i>
+                                </div>
+                            </a>
+                        </div>
+                        <div v-else-if="resultado == 'não'" class="p-4 m-4 bg-red-400 rounded shadow flex items-center">
+                            <i class='bx bx-x me-2 text-2xl'></i> Não atendemos este endereço.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+
+            <!-- Section grid de onde estamos?, area de atuação e faça uma cotação -->
+            <section>
+                <div class="max-w-[1320px] mx-auto px-4 py-8">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="text-center" v-for="servico in servicos">
+                            <div class="flex flex-col items-center">
+                                <i v-bind:class="['bx','text-6xl', 'text-blue-600', servico.icone]"></i>
+                                <h3 class="text-xl font-semibold mb-2">
+                                    {{ servico.nome }}
+                                </h3>
+                            </div>
+                            <p>{{ servico.descricao }}</p>
+                            <button
+                                class="mt-4 px-4 py-2 text-blue-500 rounded hover:bg-blue-500 hover:text-white transition duration-200 cursor-pointer">
+                                <div class=" flex items-center justify-center">
+                                    {{ servico.linkTexto}} <i class='bx bxs-arrow-right-stroke text-xl'></i>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section um pouco sobre nós -->
+            <section class="bg-gray-50 dark:bg-gray-800 md:py-8">
+                <div class="max-w-[1320px] mx-auto md:px-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" v-for="sobre in sobrenos">
+                        <div class="flex flex-col justify-center m-4 md:p-0">
+                            <h2 class="text-3xl font-bold mb-4">{{ sobre.titulo }}</h2>
+                            <div class="text-gray-700 mb-6">
+                                {{ sobre.descricao }}
+                            </div>
+                            <div class="text-gray-700 mb-6 flex items-start gap-2" v-for="item in sobre.subItens">
+                                <i v-bind:class="['bx', 'text-6xl', 'text-blue-500', item.icone ]"></i>
+                                <div>
+                                    <div class="text-xl font-bold">{{ item.titulo }}</div>
+                                    {{ item.descricao }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-center">
+                            <img v-bind:src="sobre.imagem" class="h-96">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sectionmapa onde estamos -->
+            <section>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d3785.2117173962597!2d-44.1522346!3d-22.561719!3m2!1i1024!2i768!4f13.1!5e1!3m2!1spt-BR!2sbr!4v1667588507170!5m2!1spt-BR!2sbr"
+                    width="100%" height="600" style="border: 0px; padding: 0px; margin: 0px;" frameborder="0"></iframe>
+            </section>
+        </main>
+
+        <!-- Footer componente -->
+        <footer-component />
+    </div>
+
+    <!-- Vu3.js CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+
+    <!-- axios.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script src="index.js"></script>
+
+    <script>
+        document.documentElement.classList.add('dark');
+    </script>
+</body>
+
+</html>
