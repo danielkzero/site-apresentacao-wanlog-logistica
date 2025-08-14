@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wanlog - transporte e logística</title>
+    <title>Wanlog - Política de Privacidade</title>
     <meta name="description"
-        content="Wanlog é uma empresa de transporte e logística, facilitando o gerenciamento de fretes e entregas para nossos clientes e parceiros.">
-    <meta name="keywords" content="transporte, logística, fretes, entregas, Wanlog">
+        content="Conheça nossa Política de Privacidade e saiba como protegemos e tratamos as suas informações.">
+    <meta name="keywords" content="política de privacidade, dados pessoais, Wanlog">
 
     <!-- Favicons -->
     <link rel="icon" href="assets/img/logo.png" type="image/png">
@@ -20,57 +20,110 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- Boxicons CSS -->
-    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
-    <link href='https://cdn.boxicons.com/fonts/brands/boxicons-brands.min.css' rel='stylesheet'>
+    <link href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css" rel="stylesheet">
+    <link href="https://cdn.boxicons.com/fonts/brands/boxicons-brands.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/index.css">
 </head>
 
-<body class="bg-gray-100 dark:bg-gray-800 text-gray-800" id="app">
-    <!-- painel para fechamento de menu ao clicar fora da tela -->
-    <div class="absolute left-0 top-0 z-10 w-full min-h-full bg-black opacity-50" v-on:click="fecharMenu"
-        v-bind:class="{'hidden': !toggleMenuMobile}" style="height: 100%;">
-    </div>
-
+<body class="bg-gray-100 text-gray-800 font-roboto" id="app">
     <div class="min-h-screen flex flex-col">
-        <!-- Header Section -->
-        <header class="bg-white dark:bg-gray-900">
-            <navbar-component :menus="menus" />
-        </header>        
 
-        <main>
-            <!-- Política de privacidade -->
-            <section class="w-[1320px] mx-auto px-4 py-10">
-                <h2 class="text-3xl font-bold mb-6">Política de Privacidade</h2>
-                <p class="mb-4">É política do Wanlog respeitar a sua privacidade em relação a qualquer informação sua que possamos coletar no site <a href="http://www.wanlog.com.br" class="text-blue-600 hover:underline">Wanlog</a>.</p>
-                <p class="mb-4">Solicitamos informações pessoais apenas quando realmente precisamos delas para lhe fornecer um serviço. Fazemo-lo por meios justos e legais, com o seu conhecimento e consentimento. Também informamos por que estamos coletando e como será usado.</p>
-                <p class="mb-4">Apenas retemos as informações coletadas pelo tempo necessário para fornecer o serviço solicitado. Quando armazenamos dados, protegemos dentro de meios comercialmente aceitáveis para evitar perdas e roubos, bem como acesso, divulgação, cópia, uso ou modificação não autorizados.</p>
-                <p class="mb-4">Não compartilhamos informações de identificação pessoal publicamente ou com terceiros.</p>
-                <p class="mb-4">O nosso site pode ter links para sites externos que não são operados por nós. Esteja ciente de que não temos controle sobre o conteúdo e práticas desses sites e não podemos aceitar responsabilidade por suas respectivas políticas de privacidade.</p>
-                <p class="mb-4">Você é livre para recusar a nossa solicitação de informações pessoais, entendendo que talvez não possamos fornecer alguns dos serviços desejados.</p>
-                <p class="mb-4">O uso continuado de nosso site será considerado como aceitação de nossas práticas em torno de privacidade e informações pessoais. Se você tiver alguma dúvida sobre como lidamos com dados do usuário e informações pessoais, entre em contato conosco.</p>
-                <h3 class="text-2xl font-semibold mt-6 mb-4">Mais informações</h3>
-                <p class="mb-4">Esperamos que esteja esclarecido e, como mencionado anteriormente, se houver algo que você não tem certeza se precisa ou não, geralmente é mais seguro deixar os cookies ativados, caso interaja com um dos recursos que você usa em nosso site.</p>
+        <!-- Header -->
+        <header class="bg-white shadow">
+            <navbar-component
+                :menus="menus"
+                :menuativo="'Política de Privacidade'"
+                :titulo="'Política de Privacidade'"
+                :subtitulo="'A sua privacidade é importante para nós. Conheça como protegemos seus dados.'"
+            />
+        </header>
+
+        <main class="flex-1">
+
+            <!-- Breadcrumb -->
+            <nav class="max-w-[1320px] mx-auto px-4 py-4 text-sm" aria-label="breadcrumb">
+                <ol class="flex items-center space-x-2 text-gray-600">
+                    <li>
+                        <a href="/" class="text-blue-600 hover:underline">Home</a>
+                    </li>
+                    <li><i class="bx bx-chevron-right"></i></li>
+                    <li class="font-medium">Política de Privacidade</li>
+                </ol>
+            </nav>
+
+            <!-- Header da Seção -->
+            <section class="max-w-[1320px] mx-auto px-4 py-8 md:py-16 text-center">
+                <span
+                    class="inline-flex items-center gap-2 text-xs font-semibold tracking-wider uppercase text-blue-700 bg-blue-50 px-2 py-1 rounded">
+                    <i class="bx bxs-lock"></i> Segurança & Privacidade
+                </span>
+                <h1 class="mt-3 text-3xl md:text-4xl font-extrabold leading-snug">
+                    Nossa Política de Privacidade
+                </h1>
+                <p class="mt-4 max-w-3xl mx-auto text-base md:text-lg text-gray-600">
+                    Transparência no uso de dados e respeito pela sua privacidade. Aqui você encontra todas as informações
+                    sobre como coletamos, armazenamos e utilizamos seus dados.
+                </p>
             </section>
+
+            <!-- Conteúdo da Política -->
+            <section class="max-w-[1320px] mx-auto px-4 py-10 space-y-6 text-gray-700 leading-relaxed">
+                <p>
+                    É política da <strong>Wanlog</strong> respeitar a sua privacidade em relação a qualquer informação
+                    sua que possamos coletar no site
+                    <a href="/" class="text-blue-600 hover:underline">Wanlog</a>.
+                </p>
+                <p>
+                    Solicitamos informações pessoais apenas quando realmente precisamos delas para lhe fornecer um
+                    serviço. Fazemos isso por meios justos e legais, com o seu conhecimento e consentimento.
+                    Também informamos por que estamos coletando e como será usado.
+                </p>
+                <p>
+                    Apenas retemos as informações coletadas pelo tempo necessário para fornecer o serviço solicitado.
+                    Quando armazenamos dados, protegemos dentro de meios comercialmente aceitáveis para evitar perdas,
+                    roubos, acesso, divulgação, cópia, uso ou modificação não autorizados.
+                </p>
+                <p>Não compartilhamos informações de identificação pessoal publicamente ou com terceiros.</p>
+                <p>
+                    Nosso site pode conter links para sites externos que não são operados por nós. Não temos controle
+                    sobre o conteúdo e práticas desses sites e não podemos aceitar responsabilidade por suas políticas
+                    de privacidade.
+                </p>
+                <p>
+                    Você pode recusar nossa solicitação de informações pessoais, entendendo que talvez não possamos
+                    fornecer alguns serviços desejados.
+                </p>
+                <p>
+                    O uso continuado de nosso site será considerado como aceitação de nossas práticas de privacidade.
+                    Se tiver dúvidas sobre como lidamos com dados, entre em contato conosco.
+                </p>
+
+                <h2 class="text-2xl font-semibold mt-8 mb-4">Mais informações</h2>
+                <p>
+                    Se houver algo que você não tem certeza se precisa ou não, é mais seguro deixar os cookies ativados,
+                    caso interaja com um dos recursos que você usa em nosso site.
+                </p>
+            </section>
+
+            <!-- CTA -->
+            <div class="max-w-[1320px] mx-auto px-4 mt-12">
+                <cta-component />
+            </div>
         </main>
 
-        <!-- Footer componente -->        
+        <!-- Footer -->
         <footer-component />
     </div>
 
-    <!-- Vu3.js CDN -->
+    <!-- Vue.js -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
-
-    <!-- axios.js CDN -->
+    <!-- Axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-    <!-- Custom JavaScript -->
+    <!-- Custom Scripts -->
+    <script src="dados.js"></script>
     <script src="index.js"></script>
-
-    <script>
-        document.documentElement.classList.add('dark');
-    </script>
 </body>
 
 </html>
