@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanlog - Cotação de Frete</title>
+    <meta name="description" content="Solicite uma cotação de frete personalizada para sua empresa com a Wanlog.">
+    <meta name="keywords" content="cotação, frete, transporte, logística, Wanlog">
+
+    <!-- Favicons -->
+    <link rel="icon" href="assets/img/logo.png" type="image/png">
+    <link rel="apple-touch-icon" href="assets/img/logo.png">
+
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Boxicons CSS -->
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <link href='https://cdn.boxicons.com/fonts/brands/boxicons-brands.min.css' rel='stylesheet'>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/index.css">
+</head>
+
+<body class="bg-gray-100  text-gray-800" id="app">
+    <div class="min-h-screen flex flex-col">
+        <!-- Header Section -->
+        <header class="bg-white">
+            <navbar-component :menus="menus" :titulo="'Solicitar Cotação'"
+                :subtitulo="'Receba uma cotação de frete rápida, segura e personalizada para sua empresa'" />
+        </header>
+
+        <main class="flex-1">
+            <!-- Breadcrumb -->
+            <nav class="flex max-w-[1320px] mx-auto px-4 py-4" aria-label="breadcrumb">
+                <ol class="flex items-center space-x-2">
+                    <li><a href="/" class="text-blue-600 hover:underline">Home</a></li>
+                    <li><i class="bx bx-chevron-right text-gray-500"></i></li>
+                    <li><span class="text-gray-500">Cotação de Frete</span></li>
+                </ol>
+            </nav>
+
+            <!-- Modalidades de Atendimento -->
+            <section class="max-w-[1320px] mx-auto px-4 md:px-0 mb-16">
+                <article class="grid items-center gap-6 md:gap-10 md:grid-cols-2 mb-16">
+                    <div class="order-2 md:order-1">
+                        <h2 class="text-2xl md:text-3xl font-bold flex items-center gap-2">
+                            <i class="bx bxs-rocket text-blue-600"></i> Modalidades de Atendimento
+                        </h2>
+                        <p class="mt-3 text-gray-600">
+                            Cada serviço é estruturado para oferecer flexibilidade e rapidez, garantindo que suas cargas
+                            cheguem no prazo certo.
+                            Modalidades disponíveis: Aproveitamento, Fracionado (Comum, Rápido, Express), Distribuição e
+                            Exclusivo.
+                        </p>
+
+                        <div class="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm">
+                            <span
+                                class="rounded-lg border p-3 flex items-center gap-2 transition-colors hover:bg-blue-50">
+                                <i class="bx bx-refresh-ccw"></i> Aproveitamento
+                            </span>
+                            <span
+                                class="rounded-lg border p-3 flex items-center gap-2 transition-colors hover:bg-blue-50">
+                                <i class="bx bx-truck"></i> Fracionado Comum
+                            </span>
+                            <span
+                                class="rounded-lg border p-3 flex items-center gap-2 transition-colors hover:bg-blue-50">
+                                <i class="bx bx-timer"></i> Fracionado Rápido
+                            </span>
+                            <span
+                                class="rounded-lg border p-3 flex items-center gap-2 transition-colors hover:bg-blue-50">
+                                <i class="bx bxs-rocket"></i> Fracionado Express
+                            </span>
+                            <span
+                                class="rounded-lg border p-3 flex items-center gap-2 transition-colors hover:bg-blue-50">
+                                <i class="bx bx-building-house"></i> Distribuição
+                            </span>
+                            <span
+                                class="rounded-lg border p-3 flex items-center gap-2 transition-colors hover:bg-blue-50">
+                                <i class="bx bx-car"></i> Exclusivo
+                            </span>
+                        </div>
+                    </div>
+                    <div class="order-1 md:order-2 flex justify-center">
+                        <img src="assets/img/delivery.jpg" alt="Modalidades de Atendimento"
+                            class="w-full max-w-md rounded-xl shadow-lg">
+                    </div>
+                </article>
+            </section>
+
+            <!-- Formulário de Cotação -->
+            <div class="max-w-[1320px] mx-auto bg-white rounded-3xl shadow-lg p-8 md:p-12 ring-1 ring-black/5 mb-10">
+                <p class="text-center text-gray-600 mb-10">
+                    Preencha os dados abaixo para solicitar uma cotação de frete personalizada. Entraremos em contato
+                    com a melhor proposta.
+                </p>
+
+                <form @submit.prevent="enviarCotacao" class="space-y-6">
+                    <!-- Dados da empresa -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="empresa" class="block text-gray-700 font-medium mb-1">Nome da empresa</label>
+                            <input v-model="form.empresa" type="text" id="empresa" required
+                                class="w-full border border-gray-300  rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white  text-gray-800">
+                        </div>
+                        <div>
+                            <label for="cnpj" class="block text-gray-700 font-medium mb-1">CNPJ</label>
+                            <input v-model="form.cnpj" type="text" id="cnpj" placeholder="00.000.000/0000-00" required
+                                class="w-full border border-gray-300  rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white  text-gray-800">
+                        </div>
+                    </div>
+
+                    <!-- Contato -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="contato" class="block text-gray-700 font-medium mb-1">Pessoa de contato</label>
+                            <input v-model="form.contato" type="text" id="contato" required
+                                class="w-full border border-gray-300  rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white  text-gray-800">
+                        </div>
+                        <div>
+                            <label for="telefone" class="block text-gray-700 font-medium mb-1">Telefone</label>
+                            <input v-model="form.telefone" type="tel" id="telefone" placeholder="(99) 99999-9999"
+                                required
+                                class="w-full border border-gray-300  rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white  text-gray-800">
+                        </div>
+                    </div>
+
+                    <!-- Origem e Destino -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="origem" class="block text-gray-700 font-medium mb-1">Cidade de origem</label>
+                            <input v-model="form.origem" type="text" id="origem" placeholder="Cidade de coleta" required
+                                class="w-full border border-gray-300  rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white  text-gray-800">
+                        </div>
+                        <div>
+                            <label for="destino" class="block text-gray-700 font-medium mb-1">Cidade de destino</label>
+                            <input v-model="form.destino" type="text" id="destino" placeholder="Cidade de entrega"
+                                required
+                                class="w-full border border-gray-300  rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white  text-gray-800">
+                        </div>
+                    </div>
+
+                    <!-- Tipo de carga e Modalidade -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="tipoCarga" class="block text-gray-700 font-medium mb-1">Tipo de carga</label>
+                            <select v-model="form.tipoCarga" id="tipoCarga" required
+                                class="w-full border border-gray-300  rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white  text-gray-800">
+                                <option value="" disabled>Selecione...</option>
+                                <option value="plasticos">Plásticos</option>
+                                <option value="materiaisConstrucao">Materiais de Construção</option>
+                                <option value="comercioGeral">Comércio em Geral</option>
+                                <option value="distribuidora">Distribuidoras</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="modalidade" class="block text-gray-700 font-medium mb-1">Modalidade
+                                desejada</label>
+                            <select v-model="form.modalidade" id="modalidade" required
+                                class="w-full border border-gray-300  rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white  text-gray-800">
+                                <option value="" disabled>Selecione...</option>
+                                <option value="aproveitamento">Aproveitamento</option>
+                                <option value="fracionadoComum">Fracionado Comum</option>
+                                <option value="fracionadoRapido">Fracionado Rápido</option>
+                                <option value="fracionadoExpress">Fracionado Express</option>
+                                <option value="distribuicao">Distribuição</option>
+                                <option value="exclusivo">Exclusivo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Peso, cubagem e embalagem -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div>
+                            <label for="peso" class="block text-gray-700 font-medium mb-1">Peso total (kg)</label>
+                            <input v-model="form.peso" type="number" id="peso" placeholder="Ex: 500" required
+                                class="w-full border border-gray-300  rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white  text-gray-800">
+                        </div>
+                        <div>
+                            <label for="cubagem" class="block text-gray-700 font-medium mb-1">Cubagem (m³)</label>
+                            <input v-model="form.cubagem" type="number" step="0.01" id="cubagem" placeholder="Ex: 1.25"
+                                required
+                                class="w-full border border-gray-300  rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white  text-gray-800">
+                        </div>
+                        <div>
+                            <label for="embalagem" class="block text-gray-700 font-medium mb-1">Tipo de
+                                embalagem</label>
+                            <select v-model="form.embalagem" id="embalagem" required
+                                class="w-full border border-gray-300  rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white  text-gray-800">
+                                <option value="" disabled>Selecione...</option>
+                                <option value="caixas">Caixas</option>
+                                <option value="sacos">Sacos</option>
+                                <option value="paletes">Paletes</option>
+                                <option value="outros">Outros</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Prioridade e observações -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="prioridade" class="block text-gray-700 font-medium mb-1">Prioridade</label>
+                            <select v-model="form.prioridade" id="prioridade" required
+                                class="w-full border border-gray-300  rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white  text-gray-800">
+                                <option value="" disabled>Selecione...</option>
+                                <option value="normal">Normal</option>
+                                <option value="urgente">Urgente</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="observacoes" class="block text-gray-700 font-medium mb-1">Observações
+                                adicionais</label>
+                            <textarea v-model="form.observacoes" id="observacoes" rows="4"
+                                placeholder="Ex: Acesso restrito, horários especiais..."
+                                class="w-full border border-gray-300  rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white  text-gray-800"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Botão -->
+                    <div class="flex justify-center">
+                        <button type="submit"
+                            class="hover:scale-105 cursor-pointer bg-blue-600 text-white font-semibold px-8 py-3 rounded-lg hover:bg-blue-700 shadow hover:shadow-lg transition-all">
+                            Solicitar Cotação
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer-component />
+    </div>
+
+    <!-- Vue 3 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <!-- Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- Custom JS -->
+    <script src="dados.js"></script>
+    <script>
+        Vue.createApp({
+            components: {
+                "footer-component": FooterComponent,
+                "navbar-component": NavbarComponent,
+            },
+            data() {
+                return {
+                    menus: window.menus,
+                    servicos: window.servicos,
+                    toggleMenuMobile: false,
+                    form: {
+                        empresa: "",
+                        cnpj: "",
+                        contato: "",
+                        telefone: "",
+                        origem: "",
+                        destino: "",
+                        tipoCarga: "",
+                        modalidade: "",
+                        peso: null,
+                        cubagem: null,
+                        embalagem: "",
+                        prioridade: "",
+                        observacoes: ""
+                    }
+                };
+            },
+            methods: {
+                enviarCotacao() {
+                    axios.post('./enviar-contacao.php', new URLSearchParams(this.form))
+                        .then(res => {
+                            if (res.data === "ok") {
+                                alert('Cotação enviada com sucesso!');
+                            } else {
+                                alert('Erro ao enviar.');
+                            }
+                        })
+                        .catch((ex) => alert('Erro de conexão.' + ex.message));
+                },                
+                abrirMenu() {
+                    this.toggleMenuMobile = true;
+                    document.body.classList.add("overflow-hidden"); // trava rolagem
+                },
+                fecharMenu() {
+                    this.toggleMenuMobile = false;
+                    document.body.classList.remove("overflow-hidden"); // libera rolagem
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+
+</html>
