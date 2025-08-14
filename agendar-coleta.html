@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanlog - transporte e logística</title>
+    <meta name="description"
+        content="Wanlog é uma empresa de transporte e logística, facilitando o gerenciamento de fretes e entregas para nossos clientes e parceiros.">
+    <meta name="keywords" content="transporte, logística, fretes, entregas, Wanlog">
+
+    <!-- Favicons -->
+    <link rel="icon" href="assets/img/logo.png" type="image/png">
+    <link rel="apple-touch-icon" href="assets/img/logo.png">
+
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Boxicons CSS -->
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <link href='https://cdn.boxicons.com/fonts/brands/boxicons-brands.min.css' rel='stylesheet'>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/index.css">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+</head>
+
+<body class="bg-gray-100 text-gray-800" id="app">
+    <div class="min-h-screen flex flex-col">
+        <!-- Header Section -->
+        <header class="bg-white">
+            <navbar-component :menus="menus" :titulo="'Agendar coleta'"
+                :subtitulo="'Solicite a coleta de forma rápida, segura e confiável'" />
+        </header>
+
+        <main class="flex-1">
+            <!-- Breadcrumb -->
+            <nav class="flex max-w-[1320px] mx-auto px-4 py-4" aria-label="breadcrumb">
+                <ol class="flex items-center space-x-2">
+                    <li><a href="/" class="text-blue-600 hover:underline">Home</a></li>
+                    <li><i class="bx bx-chevron-right text-gray-500"></i></li>
+                    <li><span class="text-gray-500">Agendar coleta</span></li>
+                </ol>
+            </nav>
+
+            <!-- Formulário de agendamento de coleta -->
+            <div
+                class="max-w-[1320px] mx-auto bg-white rounded-3xl shadow-lg p-8 md:p-12 ring-1 ring-black/5 mb-10">
+                <p class="text-center text-gray-600 mb-10">
+                    Preencha os dados abaixo para solicitar a coleta da sua empresa. Entraremos em contato para
+                    confirmar o agendamento.
+                </p>
+
+                <form @submit.prevent="enviarColeta" class="space-y-6">
+                    <!-- Dados da empresa -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="empresa" class="block text-gray-700 font-medium mb-1">Nome da
+                                empresa</label>
+                            <input v-model="form.empresa" type="text" id="empresa" required
+                                class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white text-gray-800">
+                        </div>
+                        <div>
+                            <label for="cnpj"
+                                class="block text-gray-700 font-medium mb-1">CNPJ</label>
+                            <input v-model="form.cnpj" type="text" id="cnpj" placeholder="00.000.000/0000-00" required
+                                class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white text-gray-800">
+                        </div>
+                    </div>
+
+                    <!-- Contato -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="contato" class="block text-gray-700 font-medium mb-1">Pessoa
+                                de contato</label>
+                            <input v-model="form.contato" type="text" id="contato" required
+                                class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white text-gray-800">
+                        </div>
+                        <div>
+                            <label for="telefone"
+                                class="block text-gray-700 font-medium mb-1">Telefone</label>
+                            <input v-model="form.telefone" type="tel" id="telefone" placeholder="(99) 99999-9999"
+                                required
+                                class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white text-gray-800">
+                        </div>
+                    </div>
+
+                    <!-- Endereço -->
+                    <div>
+                        <label for="endereco" class="block text-gray-700 font-medium mb-1">Endereço
+                            de coleta</label>
+                        <input v-model="form.endereco" type="text" id="endereco"
+                            placeholder="Rua, número, bairro, cidade, CEP" required
+                            class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white text-gray-800">
+                    </div>
+
+                    <!-- Tipo de carga -->
+                    <div>
+                        <label for="tipoCarga" class="block text-gray-700 font-medium mb-1">Tipo de
+                            carga</label>
+                        <select v-model="form.tipoCarga" id="tipoCarga" required
+                            class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white text-gray-800">
+                            <option value="" disabled>Selecione...</option>
+                            <option value="plasticos">Plásticos</option>
+                            <option value="materiaisConstrucao">Materiais de Construção</option>
+                            <option value="comercioGeral">Comércio em Geral</option>
+                            <option value="distribuidora">Distribuidoras</option>
+                        </select>
+                    </div>
+
+                    <!-- Peso, cubagem e embalagem -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div>
+                            <label for="peso" class="block text-gray-700 font-medium mb-1">Peso total
+                                (kg)</label>
+                            <input v-model="form.peso" type="number" id="peso" placeholder="Ex: 500" required
+                                class="w-full border border-gray-300  rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white text-gray-800">
+                        </div>
+                        <div>
+                            <label for="cubagem" class="block text-gray-700 font-medium mb-1">Cubagem
+                                (m³)</label>
+                            <input v-model="form.cubagem" type="number" step="0.01" id="cubagem" placeholder="Ex: 1.25"
+                                required
+                                class="w-full border border-gray-300  rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white text-gray-800">
+                        </div>
+                        <div>
+                            <label for="embalagem" class="block text-gray-700 font-medium mb-1">Tipo
+                                de embalagem</label>
+                            <select v-model="form.embalagem" id="embalagem" required
+                                class="w-full border border-gray-300  rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white text-gray-800">
+                                <option value="" disabled>Selecione...</option>
+                                <option value="caixas">Caixas</option>
+                                <option value="sacos">Sacos</option>
+                                <option value="paletes">Paletes</option>
+                                <option value="outros">Outros</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Prioridade e situações especiais -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="prioridade"
+                                class="block text-gray-700 font-medium mb-1">Prioridade</label>
+                            <select v-model="form.prioridade" id="prioridade" required
+                                class="w-full border border-gray-300  rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white  text-gray-800">
+                                <option value="" disabled>Selecione...</option>
+                                <option value="normal">Normal</option>
+                                <option value="urgente">Urgente</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="situacao"
+                                class="block text-gray-700 font-medium mb-1">Situações
+                                especiais</label>
+                            <input v-model="form.situacao" type="text" id="situacao"
+                                placeholder="Ex: Entrada de caminhão restrita, carga frágil"
+                                class="w-full border border-gray-300  rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white  text-gray-800">
+                        </div>
+                    </div>
+
+                    <!-- Data e hora -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="data" class="block text-gray-700 font-medium mb-1">Data da
+                                coleta</label>
+                            <input v-model="form.data" type="date" id="data" required
+                                class="w-full border border-gray-300  rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white  text-gray-800">
+                        </div>
+                        <div>
+                            <label for="hora" class="block text-gray-700 font-medium mb-1">Hora da
+                                coleta</label>
+                            <input v-model="form.hora" type="time" id="hora" required
+                                class="w-full border border-gray-300  rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white  text-gray-800">
+                        </div>
+                    </div>
+
+                    <!-- Observações -->
+                    <div>
+                        <label for="observacoes"
+                            class="block text-gray-700 font-medium mb-1">Observações
+                            adicionais</label>
+                        <textarea v-model="form.observacoes" id="observacoes" rows="4"
+                            placeholder="Ex: Acesso restrito, horário de operação da empresa..."
+                            class="w-full border border-gray-300  rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white  text-gray-800"></textarea>
+                    </div>
+
+                    <!-- Botão -->
+                    <div class="flex justify-center">
+                        <button type="submit"
+                            class="hover:scale-105 cursor-pointer bg-blue-600 text-white font-semibold px-8 py-3 rounded-lg hover:bg-blue-700 shadow hover:shadow-lg transition-all">
+                            Agendar Coleta
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer-component />
+    </div>
+
+    <!-- Vue 3 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <!-- Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- Custom JS -->
+    <script src="dados.js"></script>
+    <script>
+        Vue.createApp({
+            components: {
+                "footer-component": FooterComponent,
+                "navbar-component": NavbarComponent,
+            },
+            data() {
+                return {
+                    menus: menus,
+                    toggleMenuMobile: false,
+                    form: {
+                        empresa: "",
+                        cnpj: "",
+                        contato: "",
+                        telefone: "",
+                        endereco: "",
+                        tipoCarga: "",
+                        peso: null,
+                        cubagem: null,
+                        embalagem: "",
+                        prioridade: "",
+                        situacao: "",
+                        data: "",
+                        hora: "",
+                        observacoes: "",
+                    },
+                };
+            },
+            methods: {
+                enviarColeta() {
+                    axios.post('./enviar-coleta.php', new URLSearchParams(this.form))
+                        .then(res => {
+                            if (res.data === "ok") {
+                                alert('Coleta solicitada com sucesso!');
+                            } else {
+                                alert('Erro ao solicitar coleta.');
+                            }
+                        })
+                        .catch((ex) => alert('Erro de conexão.' + ex.message));
+                },
+                abrirMenu() {
+                    this.toggleMenuMobile = true;
+                    document.body.classList.add("overflow-hidden"); // trava rolagem
+                },
+                fecharMenu() {
+                    this.toggleMenuMobile = false;
+                    document.body.classList.remove("overflow-hidden"); // destrava rolagem
+                },
+            },
+        }).mount("#app");
+    </script>
+</body>
+
+</html>
