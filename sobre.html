@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanlog - transporte e logística</title>
+    <meta name="description"
+        content="Wanlog é uma empresa de transporte e logística, facilitando o gerenciamento de fretes e entregas para nossos clientes e parceiros.">
+    <meta name="keywords" content="transporte, logística, fretes, entregas, Wanlog">
+
+    <!-- Favicons -->
+    <link rel="icon" href="assets/img/logo.png" type="image/png">
+    <link rel="apple-touch-icon" href="assets/img/logo.png">
+
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Boxicons CSS -->
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <link href='https://cdn.boxicons.com/fonts/brands/boxicons-brands.min.css' rel='stylesheet'>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/index.css">
+</head>
+
+<body class="bg-gray-100  text-gray-800" id="app">
+    <div class="min-h-screen flex flex-col">
+        <!-- Header Section -->
+        <header class="bg-white">
+            <navbar-component :menus="menus" :menuativo="'Sobre Nós'" :titulo="'Sobre Nós'" :subtitulo="'Conheça nossa história'" />
+        </header>
+
+        <main class="flex-1">
+
+            <!-- Breadcrumb -->
+            <nav class="flex max-w-[1320px] mx-auto px-4 py-4" aria-label="breadcrumb">
+                <ol class="flex items-center space-x-2">
+                    <li><a href="/" class="text-blue-600 hover:underline">Home</a></li>
+                    <li><i class="bx bx-chevron-right text-gray-500"></i></li>
+                    <li><span class="text-gray-500">Sobre Nós</span></li>
+                </ol>
+            </nav>
+
+            <!-- Sobre Nós -->
+            <section class="max-w-[1320px] mx-auto relative py-8 md:py-16 px-4">
+
+                <!-- Cabeçalho principal -->
+                <header class="mb-16 text-center relative z-10">
+                    <span class="inline-flex items-center gap-2 text-xs font-semibold tracking-wider uppercase text-blue-700 bg-blue-50 px-2 py-1 rounded">
+                        <i class="bx bxs-truck"></i> WANLOG
+                    </span>
+                    <h1 class="mt-3 text-3xl md:text-4xl font-extrabold leading-snug">
+                        Soluções logísticas eficientes, seguras e personalizadas
+                    </h1>
+                    <p class="mt-4 max-w-3xl mx-auto text-base md:text-lg text-gray-600">
+                        Mais de uma década de experiência conectando pessoas, negócios e oportunidades na região Sul Fluminense e Costa Verde/RJ. Atendemos mais de 100 clientes ativos com soluções estratégicas.
+                    </p>
+                </header>
+
+                <!-- Blocos zigue-zague -->
+                <div class="space-y-20">
+
+                    <!-- Missão -->
+                    <article class="grid items-center gap-6 md:gap-10 md:grid-cols-2">
+                        <div class="order-2 md:order-1">
+                            <h2 class="text-2xl md:text-3xl font-bold flex items-center gap-2">
+                                <i class="bx bx-target-lock text-blue-600"></i> Nossa missão
+                            </h2>
+                            <p class="mt-3 text-gray-600">
+                                Atender com excelência às necessidades logísticas das empresas da região, unindo qualidade, agilidade e compromisso para entregar resultados que fazem a diferença.
+                            </p>
+                            <ul class="mt-4 grid gap-2 text-sm md:text-base">
+                                <li class="flex items-start gap-2"><i class="bx bx-check-circle mt-0.5 text-blue-600"></i> Eficiência operacional ponta a ponta</li>
+                                <li class="flex items-start gap-2"><i class="bx bx-check-circle mt-0.5 text-blue-600"></i> Segurança e rastreabilidade</li>
+                                <li class="flex items-start gap-2"><i class="bx bx-check-circle mt-0.5 text-blue-600"></i> Soluções personalizadas por segmento</li>
+                            </ul>
+                        </div>
+                        <div class="order-1 md:order-2">
+                            <div class="overflow-hidden rounded-2xl shadow-lg ring-1 ring-black/5 transition-transform duration-300 hover:scale-105">
+                                <img src="/assets/img/delivery.jpg" alt="Equipe WANLOG planejando operações logística" class="w-full h-96 object-cover">
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Experiência -->
+                    <article class="grid items-center gap-6 md:gap-10 md:grid-cols-2">
+                        <div class="order-1">
+                            <div class="overflow-hidden rounded-2xl shadow-lg ring-1 ring-black/5 transition-transform duration-300 hover:scale-105">
+                                <img src="/assets/img/clientes.jpg" alt="Caminhões e operações de carga" class="w-full object-cover">
+                            </div>
+                        </div>
+                        <div class="order-2">
+                            <h2 class="text-2xl md:text-3xl font-bold flex items-center gap-2">
+                                <i class="bx bx-certification text-blue-600"></i> Experiência que gera valor
+                            </h2>
+                            <p class="mt-3 text-gray-600">
+                                Mais de 10 anos de vivência do fundador, <strong>Wander da Silva Rodrigues</strong>, traduzidos em processos maduros e compreensão profunda das demandas de cada cliente.
+                            </p>
+                            <div class="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-4">
+                                <div class="rounded-xl border border-gray-200 p-6 text-center transition-shadow hover:shadow-md">
+                                    <div class="text-3xl font-extrabold">100+</div>
+                                    <div class="text-sm text-gray-500">Clientes ativos e parceiros estratégicos</div>
+                                </div>
+                                <div class="rounded-xl border border-gray-200 p-6 text-center transition-shadow hover:shadow-md">
+                                    <div class="text-3xl font-extrabold">10+</div>
+                                    <div class="text-sm text-gray-500">Anos de experiência no mercado logístico</div>
+                                </div>
+                                <div class="rounded-xl border border-gray-200 p-6 text-center transition-shadow hover:shadow-md">
+                                    <div class="text-3xl font-extrabold">200+</div>
+                                    <div class="text-sm text-gray-500">Rotas otimizadas anualmente</div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Modalidades -->
+                    <article class="grid items-center gap-6 md:gap-10 md:grid-cols-2">
+                        <div class="order-2 md:order-1">
+                            <h2 class="text-2xl md:text-3xl font-bold flex items-center gap-2">
+                                <i class="bx bxs-rocket text-blue-600"></i> Modalidades de atendimento
+                            </h2>
+                            <p class="mt-3 text-gray-600">
+                                Flexibilidade, agilidade e dinâmica para cada necessidade: Aproveitamento, Fracionado (Comum, Rápido, Express), Distribuição e Exclusivo.
+                            </p>
+                            <div class="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm">
+                                <span class="rounded-lg border p-3 flex items-center gap-2 transition-colors hover:bg-blue-50"><i class="bx bx-refresh-ccw"></i> Aproveitamento</span>
+                                <span class="rounded-lg border p-3 flex items-center gap-2 transition-colors hover:bg-blue-50"><i class="bx bx-truck"></i> Fracionado Comum</span>
+                                <span class="rounded-lg border p-3 flex items-center gap-2 transition-colors hover:bg-blue-50"><i class="bx bx-timer"></i> Fracionado Rápido</span>
+                                <span class="rounded-lg border p-3 flex items-center gap-2 transition-colors hover:bg-blue-50"><i class="bx bxs-rocket"></i> Fracionado Express</span>
+                                <span class="rounded-lg border p-3 flex items-center gap-2 transition-colors hover:bg-blue-50"><i class="bx bx-building-house"></i> Distribuição</span>
+                                <span class="rounded-lg border p-3 flex items-center gap-2 transition-colors hover:bg-blue-50"><i class="bx bx-car"></i> Exclusivo</span>
+                            </div>
+                        </div>
+                        <div class="order-1 md:order-2">
+                            <div class="overflow-hidden rounded-2xl shadow-lg ring-1 ring-black/5 transition-transform duration-300 hover:scale-105">
+                                <img src="/assets/img/trucks.jpg" alt="Operações de distribuição e fracionado" class="w-full h-96 object-cover">
+                            </div>
+                        </div>
+                    </article>
+
+                    <cta-component />
+
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer-component />
+    </div>
+
+    <!-- Vue 3 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <!-- Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- Custom JS -->
+    <script src="dados.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>
